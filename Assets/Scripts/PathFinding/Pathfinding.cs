@@ -9,7 +9,7 @@ public class Pathfinding : MonoBehaviour {
     void Update() {
         this.FindPath(seeker.position, target.position);
     }
-
+	
     void FindPath(Vector3 startPos, Vector3 targetPos) {
         Node startNode = this.grid.NodeFromWorldPoint(startPos);
         Node targetNode = this.grid.NodeFromWorldPoint(targetPos);

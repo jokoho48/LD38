@@ -1,6 +1,6 @@
 fileFormatVersion: 2
-guid: 1730eb0b25f7069458ce2c4051c643b1
-timeCreated: 1492869182
+guid: 4de6263014de5594882d012286562006
+timeCreated: 1492874075
 licenseType: Pro
 ModelImporter:
   serializedVersion: 19
@@ -57,7 +57,7 @@ ModelImporter:
     normalSmoothAngle: 60
     normalImportMode: 0
     tangentImportMode: 3
-  importAnimation: 1
+  importAnimation: 0
   copyAvatar: 0
   humanDescription:
     serializedVersion: 2

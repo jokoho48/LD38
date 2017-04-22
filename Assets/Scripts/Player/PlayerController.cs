@@ -22,7 +22,7 @@ public class PlayerController : MonoBehaviour
 	void Update()
 	{
 		moveDir = new Vector3(Input.GetAxis("Horizontal"), 0, Input.GetAxis("Vertical")).normalized;
-		if (Input.GetButtonDown("Jump"))
+		if (Input.GetKeyDown(KeyCode.Space))
 		{
 			isJumping = true;
 			if (GravObj.isGrounded)
@@ -31,24 +31,36 @@ public class PlayerController : MonoBehaviour
 			}
 		}
 
-		if (Input.GetButtonUp("Jump") || StartTime + JumpTime > Time.time)
+		if (Input.GetKeyUp(KeyCode.Space) || StartTime + JumpTime > Time.time)
 			isJumping = false;
-
-		if (hasExitPlanetGravity)
-		{
-			RenderSettings.fogStartDistance = Mathf.Lerp(RenderSettings.fogStartDistance, 1000, 60 * Time.deltaTime);
-			RenderSettings.fogEndDistance = Mathf.Lerp(RenderSettings.fogEndDistance, 1500, 60 * Time.deltaTime);
-		}
-		else
-		{
-			RenderSettings.fogStartDistance = 50;
-			RenderSettings.fogEndDistance = 60;
-		}
 	}
 
+
+	
 	void FixedUpdate()
 	{
 		rb.MovePosition(rb.position + transform.TransformDirection(moveDir) * moveSpeed * Time.deltaTime);
+
+		// TODO: add Smooth Transtion
+		if (hasExitPlanetGravity)
+		{
+			if (RenderSettings.fogStartDistance != 500)
+			{
+				RenderSettings.fogStartDistance = Mathf.Lerp(RenderSettings.fogStartDistance, 500, 1200);
+				RenderSettings.fogEndDistance = Mathf.Lerp(RenderSettings.fogEndDistance, 600, 1200);
+			}
+			
+		}
+		else
+		{
+			if (RenderSettings.fogStartDistance != 50)
+			{
+				RenderSettings.fogStartDistance = Mathf.Lerp(RenderSettings.fogStartDistance, 50, 1200);
+				RenderSettings.fogEndDistance = Mathf.Lerp(RenderSettings.fogEndDistance, 60, 1200);
+			}
+			
+		}
+		// Debug.Log("Fog: " + RenderSettings.fogEndDistance.ToString() + RenderSettings.fogStartDistance.ToString());
 	}
 
 }
