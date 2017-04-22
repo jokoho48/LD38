@@ -6,33 +6,35 @@ public class GravityBody : MonoBehaviour {
 
 	public float PlanetSize;
 	public float PlanetGravity;
+	public PlayerController player;
 
 	void Start()
 	{
 		if (PlanetSize == 0)
 			PlanetSize = this.transform.localScale.x;
 		if (PlanetGravity == 0)
-			PlanetGravity = PlanetSize * 2;
+			PlanetGravity = PlanetSize / 2;
 	}
 
-	void Awake()
+	public void UpdatePhysics(Transform t, Rigidbody r, bool isGrounded)
 	{
-		Gravity.RegisterGravityBody(this);
-	}
+		if (player.hasExitPlanetGravity)
+			return;
+		Vector3 objUp = t.up;
+		Vector3 gravityUp = (t.position - transform.position).normalized;
 
-	void OnEnable()
-	{
-		Gravity.RegisterGravityBody(this);
-	}
+		if (player.isJumping)
+			r.AddForce(gravityUp * PlanetGravity);
+		else
+			r.AddForce(gravityUp * -PlanetGravity);
 
-	void OnDestroy()
-	{
-		Gravity.UnregisterGravityBody(this);
-	}
 
-	void OnDisable()
-	{
-		Gravity.UnregisterGravityBody(this);
+		r.drag = (isGrounded) ? 1f : 0.1f;
+
+		// Orient relatived to gravity
+		var q = Quaternion.FromToRotation(objUp, gravityUp);
+		q = q * t.rotation;
+		t.rotation = Quaternion.Slerp(t.rotation, q, 0.1f);
 	}
 
 	void OnDrawGizmos()

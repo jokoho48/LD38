@@ -7,8 +7,7 @@ public class GravityObject : MonoBehaviour {
 
 	private Rigidbody rb;
 	private bool isGrounded = false;
-
-
+	public GravityBody currentGravityBody;
 
 	void Start()
 	{
@@ -20,7 +19,7 @@ public class GravityObject : MonoBehaviour {
 
 	void FixedUpdate()
 	{
-		Gravity.UpdatePhysics(this.transform, rb, isGrounded);
+		currentGravityBody.UpdatePhysics(this.transform, rb, isGrounded);
 	}
 
 	void OnCollisionEnter(Collision collision)
@@ -28,6 +27,7 @@ public class GravityObject : MonoBehaviour {
 		if (collision.gameObject.layer == LayerMask.NameToLayer(Gravity.groundLayerName))
 		{
 			isGrounded = true;
+			currentGravityBody = collision.gameObject.GetComponent<GravityBody>();
 		}
 	}
 
