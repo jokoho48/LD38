@@ -31,7 +31,7 @@ public class GravityBody : MonoBehaviour {
 		// Orient relatived to gravity
 		var q = Quaternion.FromToRotation(objUp, gravityUp);
 		q = q * t.rotation;
-		t.rotation = Quaternion.Slerp(t.rotation, q, 0.1f);
+		t.rotation = Quaternion.Slerp(t.rotation, q, 50 * Time.fixedDeltaTime);
 	}
 
 	void OnDrawGizmos()
