@@ -7,26 +7,21 @@ public class Pathfinding : MonoBehaviour {
     public Grid grid;
 
     void Update() {
-        this.FindPath(seeker.position, target.position);
+        if (Input.GetButtonDown("Jump"))
+            this.FindPath(seeker.position, target.position);
     }
 
     void FindPath(Vector3 startPos, Vector3 targetPos) {
         Node startNode = this.grid.NodeFromWorldPoint(startPos);
         Node targetNode = this.grid.NodeFromWorldPoint(targetPos);
 
-        List<Node> openSet = new List<Node>();
+        NodeHeap openSet = new NodeHeap(this.grid.MaxSize);
         HashSet<Node> closedSet = new HashSet<Node>();
         openSet.Add(startNode);
 
         while (openSet.Count > 0) {
-            Node currentNode = openSet[0];
-            for (int i = 1; i < openSet.Count; i++) {
-                if (openSet[i].fCost < currentNode.fCost || openSet[i].fCost == currentNode.fCost && openSet[i].hCost < currentNode.hCost) {
-                    currentNode = openSet[i];
-                }
-            }
+            Node currentNode = openSet.RemoveFirst();
 
-            openSet.Remove(currentNode);
             closedSet.Add(currentNode);
 
             if (currentNode == targetNode) {
