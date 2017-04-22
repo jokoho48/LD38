@@ -6,20 +6,21 @@ using UnityEngine;
 public class GravityObject : MonoBehaviour {
 
 	private Rigidbody rb;
-	private bool isGrounded = false;
+	public bool isGrounded = false;
 	public GravityBody currentGravityBody;
-
+	private PlayerController playerC;
 	void Start()
 	{
 		rb = GetComponent<Rigidbody>();
 		rb.WakeUp();
 		rb.useGravity = false;
 		rb.constraints = RigidbodyConstraints.FreezeRotation;
+		playerC = GetComponent<PlayerController>();
 	}
 
 	void FixedUpdate()
 	{
-		currentGravityBody.UpdatePhysics(this.transform, rb, isGrounded);
+		currentGravityBody.UpdatePhysics(this.transform, rb, isGrounded, playerC);
 	}
 
 	void OnCollisionEnter(Collision collision)

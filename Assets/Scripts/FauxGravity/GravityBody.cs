@@ -4,19 +4,16 @@ using UnityEngine;
 
 public class GravityBody : MonoBehaviour {
 
-	public float PlanetSize;
-	public float PlanetGravity;
-	public PlayerController player;
+
+	public float gravity;
 
 	void Start()
 	{
-		if (PlanetSize == 0)
-			PlanetSize = this.transform.localScale.x;
-		if (PlanetGravity == 0)
-			PlanetGravity = PlanetSize / 2;
+		if (gravity == 0)
+			gravity = this.transform.localScale.x + this.transform.localScale.x / 2;
 	}
 
-	public void UpdatePhysics(Transform t, Rigidbody r, bool isGrounded)
+	public void UpdatePhysics(Transform t, Rigidbody r, bool isGrounded, PlayerController player)
 	{
 		if (player.hasExitPlanetGravity)
 			return;
@@ -24,9 +21,9 @@ public class GravityBody : MonoBehaviour {
 		Vector3 gravityUp = (t.position - transform.position).normalized;
 
 		if (player.isJumping)
-			r.AddForce(gravityUp * PlanetGravity);
+			r.AddForce(gravityUp * gravity);
 		else
-			r.AddForce(gravityUp * -PlanetGravity);
+			r.AddForce(gravityUp * -gravity);
 
 
 		r.drag = (isGrounded) ? 1f : 0.1f;
@@ -39,6 +36,6 @@ public class GravityBody : MonoBehaviour {
 
 	void OnDrawGizmos()
 	{
-		Gizmos.DrawWireSphere(this.transform.position, PlanetGravity + PlanetSize);
+		Gizmos.DrawWireSphere(this.transform.position, gravity);
 	}
 }
