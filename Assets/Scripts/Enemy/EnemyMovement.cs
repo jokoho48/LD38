@@ -18,10 +18,7 @@ public class EnemyMovement : MonoBehaviour {
 	void FixedUpdate() {
         Vector3 moveDirection = Vector3.Normalize(this.player.transform.position - this.transform.position);
         rb.MovePosition(rb.position + moveDirection * Time.fixedDeltaTime * speed);
-        transform.LookAt(this.player.transform);
-		Vector3 gravityUp = (transform.position - PlayerController.GravObj.transform.position).normalized;
-		var q = Quaternion.FromToRotation(-transform.forward, gravityUp);
-		q = q * transform.rotation;
-		transform.rotation = Quaternion.Slerp(transform.rotation, q, 50 * Time.fixedDeltaTime);
+
+        transform.rotation = Quaternion.LookRotation(moveDirection, PlayerController.GravObj.transform.up);
 	}
 }
