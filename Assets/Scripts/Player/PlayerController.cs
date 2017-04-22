@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class PlayerController : MonoBehaviour
 {
-	GravityObject GravObj;
+	public static GravityObject GravObj;
 	Vector3 moveDir;
 	public float moveSpeed = 15;
 	public bool isJumping = false;
@@ -39,7 +39,7 @@ public class PlayerController : MonoBehaviour
 	
 	void FixedUpdate()
 	{
-		rb.MovePosition(rb.position + transform.TransformDirection(moveDir) * moveSpeed * Time.deltaTime);
+		rb.MovePosition(rb.position + transform.TransformDirection(moveDir) * moveSpeed * Time.fixedDeltaTime);
 
 		// TODO: add Smooth Transtion
 		if (hasExitPlanetGravity)

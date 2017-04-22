@@ -108,6 +108,40 @@ NavMeshSettings:
     tileSize: 256
     accuratePlacement: 0
   m_NavMeshData: {fileID: 0}
+--- !u!1 &4772312 stripped
+GameObject:
+  m_PrefabParentObject: {fileID: 1448158910667906, guid: 963231e3fa342354ea15ddfe61b1acc6,
+    type: 2}
+  m_PrefabInternal: {fileID: 1853311574}
+--- !u!114 &4772313
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 4772312}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e0941922a0f3f284a85f2c33110f4a7e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  speed: 0
+  rotationSpeed: 0
+  player: {fileID: 1019842829}
+--- !u!54 &4772314
+Rigidbody:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 4772312}
+  serializedVersion: 2
+  m_Mass: 1
+  m_Drag: 0
+  m_AngularDrag: 0.05
+  m_UseGravity: 1
+  m_IsKinematic: 0
+  m_Interpolate: 0
+  m_Constraints: 0
+  m_CollisionDetection: 0
 --- !u!1 &205278915
 GameObject:
   m_ObjectHideFlags: 0
@@ -419,6 +453,11 @@ MeshFilter:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1013905903}
   m_Mesh: {fileID: 10207, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!1 &1019842829 stripped
+GameObject:
+  m_PrefabParentObject: {fileID: 1562309163141918, guid: b4dfcf68a5018c84f90c604e78509080,
+    type: 2}
+  m_PrefabInternal: {fileID: 807512640}
 --- !u!1 &1188443565
 GameObject:
   m_ObjectHideFlags: 0
@@ -725,7 +764,13 @@ Prefab:
       propertyPath: m_RootOrder
       value: 2
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    - target: {fileID: 114104285863900388, guid: 963231e3fa342354ea15ddfe61b1acc6,
+        type: 2}
+      propertyPath: player
+      value: 
+      objectReference: {fileID: 1019842829}
+    m_RemovedComponents:
+    - {fileID: 114104285863900388, guid: 963231e3fa342354ea15ddfe61b1acc6, type: 2}
   m_ParentPrefab: {fileID: 100100000, guid: 963231e3fa342354ea15ddfe61b1acc6, type: 2}
   m_IsPrefabParent: 0
 --- !u!1 &1872300145
