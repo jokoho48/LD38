@@ -124,8 +124,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e0941922a0f3f284a85f2c33110f4a7e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speed: 1
-  rotationSpeed: 0
+  speed: 5
+  rotationSpeed: 5
   player: {fileID: 1019842829}
 --- !u!54 &4772314
 Rigidbody:
@@ -137,7 +137,7 @@ Rigidbody:
   m_Mass: 1
   m_Drag: 0
   m_AngularDrag: 0.05
-  m_UseGravity: 1
+  m_UseGravity: 0
   m_IsKinematic: 0
   m_Interpolate: 0
   m_Constraints: 0
@@ -240,7 +240,7 @@ Prefab:
     m_Modifications:
     - target: {fileID: 4307397161100002, guid: b4dfcf68a5018c84f90c604e78509080, type: 2}
       propertyPath: m_LocalPosition.x
-      value: -122.05
+      value: -121.59
       objectReference: {fileID: 0}
     - target: {fileID: 4307397161100002, guid: b4dfcf68a5018c84f90c604e78509080, type: 2}
       propertyPath: m_LocalPosition.y
@@ -734,15 +734,15 @@ Prefab:
     m_Modifications:
     - target: {fileID: 4323747394242110, guid: 963231e3fa342354ea15ddfe61b1acc6, type: 2}
       propertyPath: m_LocalPosition.x
-      value: -112.59
+      value: 197.29
       objectReference: {fileID: 0}
     - target: {fileID: 4323747394242110, guid: 963231e3fa342354ea15ddfe61b1acc6, type: 2}
       propertyPath: m_LocalPosition.y
-      value: 26.46
+      value: -1.7
       objectReference: {fileID: 0}
     - target: {fileID: 4323747394242110, guid: 963231e3fa342354ea15ddfe61b1acc6, type: 2}
       propertyPath: m_LocalPosition.z
-      value: 111.84
+      value: 148.39
       objectReference: {fileID: 0}
     - target: {fileID: 4323747394242110, guid: 963231e3fa342354ea15ddfe61b1acc6, type: 2}
       propertyPath: m_LocalRotation.x
