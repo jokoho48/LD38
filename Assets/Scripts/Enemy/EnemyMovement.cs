@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 [RequireComponent(typeof(Rigidbody))]
 public class EnemyMovement : MonoBehaviour {
-    public int speed;
+    public float speed;
     public float rotationSpeed;
     public GameObject player;
 
@@ -18,17 +18,17 @@ public class EnemyMovement : MonoBehaviour {
 
     void Update() {
         if (this.rb.velocity != Vector3.zero && Physics.Raycast(this.transform.position, this.rb.velocity, out this.hit, 100f)) {
+            Debug.Log(Vector3.Angle(this.rb.velocity, this.hit.normal));
             this.target = this.hit.point + this.hit.normal * 5;
         }
-        if (Vector3.Distance(this.transform.position, this.target) < 5) {
+        if (Vector3.Distance(this.transform.position, this.target) < 1) {
             this.target = player.transform.position;
         }
     }
 	
 	void FixedUpdate() {
-        if (Vector3.Distance(this.transform.position, this.player.transform.position) > 10f) {
-            Vector3 moveDirection = Vector3.Normalize(this.target - this.transform.position);
-            rb.velocity = moveDirection * this.speed;
+        if (Vector3.Distance(this.transform.position, this.player.transform.position) > 5) {
+            this.rb.velocity = Vector3.MoveTowards(this.rb.velocity, Vector3.Normalize(this.target - this.transform.position) * this.speed, 0.1f);
         }
         
         this.transform.rotation = Quaternion.RotateTowards(this.transform.rotation, Quaternion.LookRotation(this.rb.velocity, PlayerController.GravObj.transform.up), this.rotationSpeed);
@@ -36,10 +36,14 @@ public class EnemyMovement : MonoBehaviour {
 
     RaycastHit hit;
     private void OnDrawGizmos() {
-        Gizmos.color = Color.blue;
-        Gizmos.DrawLine(this.transform.position, hit.point);
-        Gizmos.DrawLine(hit.point, hit.point + hit.normal * 10);
-        Gizmos.color = Color.yellow;
-        Gizmos.DrawLine(this.transform.position, this.transform.position + this.rb.velocity * this.speed);
+        if (this.hit.point != Vector3.zero) {
+            Gizmos.color = Color.blue;
+            Gizmos.DrawLine(this.transform.position, hit.point);
+            Gizmos.DrawLine(hit.point, hit.point + hit.normal * 10);
+        }
+        if (this.rb) {
+            Gizmos.color = Color.yellow;
+            Gizmos.DrawLine(this.transform.position, this.transform.position + this.rb.velocity * this.speed);
+        }
     }
 }
