@@ -18,8 +18,8 @@ public class EnemyMovement : MonoBehaviour {
 
     void Update() {
         if (this.rb.velocity != Vector3.zero && Physics.Raycast(this.transform.position, this.rb.velocity, out this.hit, 100f)) {
-            Debug.Log(Vector3.Angle(this.rb.velocity, this.hit.normal));
-            this.target = this.hit.point + this.hit.normal * 5;
+            if (this.hit.collider.gameObject.tag != "Player")
+                this.target = this.hit.point + this.hit.normal * 5;
         }
         if (Vector3.Distance(this.transform.position, this.target) < 1) {
             this.target = player.transform.position;
@@ -27,7 +27,7 @@ public class EnemyMovement : MonoBehaviour {
     }
 	
 	void FixedUpdate() {
-        if (Vector3.Distance(this.transform.position, this.player.transform.position) > 5) {
+        if (Vector3.Distance(this.transform.position, this.player.transform.position) > 4) {
             this.rb.velocity = Vector3.MoveTowards(this.rb.velocity, Vector3.Normalize(this.target - this.transform.position) * this.speed, 0.1f);
         }
         
